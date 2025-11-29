@@ -1,18 +1,67 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>jogobuh</title>
-    <script type="module" crossorigin src="./assets/index-CXADvsCo.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-2-dzof5S.css">
-  </head>
-  <body>
-    <div id="root">
-      <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; font-size: 2rem;">
-        Carregando aplicação... (Se isso não sumir, o Javascript não carregou)
-      </div>
-    </div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>jogobuh</title>
+  <style>
+    #debug-log {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-height: 200px;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.8);
+      color: lime;
+      font-family: monospace;
+      padding: 10px;
+      z-index: 10000;
+      display: none;
+      /* Hidden by default, shown on error */
+    }
+
+    .error-msg {
+      color: red;
+      border-bottom: 1px solid #444;
+      padding: 2px 0;
+    }
+  </style>
+  <script>
+    window.onerror = function (msg, url, line, col, error) {
+      var log = document.getElementById('debug-log');
+      if (log) {
+        log.style.display = 'block';
+        var div = document.createElement('div');
+        div.className = 'error-msg';
+        div.textContent = 'Error: ' + msg + ' at ' + url + ':' + line + ':' + col;
+        log.appendChild(div);
+      }
+    };
+    console.log = (function (oldLog) {
+      return function (message) {
+        oldLog.apply(console, arguments);
+        // Optional: log normal messages too if needed
+      }
+    })(console.log);
+  </script>
+  <script type="module" crossorigin src="./assets/index-C-CPPDIu.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-2-dzof5S.css">
+</head>
+
+<body>
+  <div id="loading-msg"
+    style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; font-size: 2rem; background: #f0f0f0; position: absolute; top: 0; left: 0; width: 100%; z-index: 100;">
+    Carregando aplicação... (Versão Debug 2)
+  </div>
+  <div id="debug-log"></div>
+  <div id="root"></div>
+  <script>
+    // Hide loading message when app mounts (we'll do this in React, or timeout)
+    // For now, let's leave it visible until React removes it or covers it.
+  </script>
+</body>
+
 </html>
